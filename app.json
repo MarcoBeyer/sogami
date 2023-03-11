@@ -13,11 +13,17 @@
     "updates": {
       "fallbackToCacheTimeout": 0
     },
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
     "assetBundlePatterns": [
       "**/*"
     ],
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "de.marcobeyer.sogami"
     },
     "android": {
       "adaptiveIcon": {
@@ -27,6 +33,12 @@
     },
     "web": {
       "favicon": "./assets/favicon.png"
-    }
+    },
+    "extra": {
+      "eas": {
+        "projectId": "0cd9a70d-21a1-4408-bc97-ddef5da5f42e"
+      }
+    },
+    "owner": "marcobeyer"
   }
 }

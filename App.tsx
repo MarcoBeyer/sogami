@@ -11,8 +11,14 @@ import {
   extendTheme,
   VStack,
   Box,
+  StatusBar,
+  IconButton,
+  Icon,
 } from "native-base";
 import NativeBaseIcon from "./components/NativeBaseIcon";
+import { MaterialIcons } from "@expo/vector-icons";
+
+import * as serviceWorkerRegistration from "./serviceWorkerRegistration";
 
 // Define the config
 const config = {
@@ -24,8 +30,29 @@ const config = {
 export const theme = extendTheme({ config });
 type MyThemeType = typeof theme;
 declare module "native-base" {
-  interface ICustomTheme extends MyThemeType {}
+  interface ICustomTheme extends MyThemeType { }
 }
+
+function AppBar() {
+  return <>
+    <StatusBar backgroundColor="#3700B3" barStyle="light-content" />
+    <Box safeAreaTop bg="violet.600" />
+    <HStack bg="violet.800" px="1" py="3" justifyContent="space-between" alignItems="center" w="100%" maxW="350">
+      <HStack alignItems="center">
+        <IconButton icon={<Icon size="sm" as={MaterialIcons} name="menu" color="white" />} />
+        <Text color="white" fontSize="20" fontWeight="bold">
+          Home
+        </Text>
+      </HStack>
+      <HStack>
+        <IconButton icon={<Icon as={MaterialIcons} name="favorite" size="sm" color="white" />} />
+        <IconButton icon={<Icon as={MaterialIcons} name="search" size="sm" color="white" />} />
+        <IconButton icon={<Icon as={MaterialIcons} name="more-vert" size="sm" color="white" />} />
+      </HStack>
+    </HStack>
+  </>;
+}
+
 export default function App() {
   return (
     <NativeBaseProvider>
@@ -35,9 +62,10 @@ export default function App() {
         px={4}
         flex={1}
       >
+        <AppBar />
         <VStack space={5} alignItems="center">
           <NativeBaseIcon />
-          <Heading size="lg">Welcome to NativeBase</Heading>
+          <Heading size="lg">Welcome to NativeBse</Heading>
           <HStack space={2} alignItems="center">
             <Text>Edit</Text>
             <Box
@@ -56,6 +84,7 @@ export default function App() {
             </Box>
             <Text>and save to reload.</Text>
           </HStack>
+
           <Link href="https://docs.nativebase.io" isExternal>
             <Text color="primary.500" underline fontSize={"xl"}>
               Learn NativeBase
@@ -85,3 +114,8 @@ function ToggleDarkMode() {
     </HStack>
   );
 }
+
+// If you want your app to work offline and load faster, you can change
+// unregister() to register() below. Note this comes with some pitfalls.
+// Learn more about service workers: https://cra.link/PWA
+serviceWorkerRegistration.register();
